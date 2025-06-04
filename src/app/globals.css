@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -119,4 +120,13 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* matches your header height */
+}
+section {
+  min-height: 100vh;
+  padding-top: 80px; /* matches your header height */
+  scroll-margin-top: 80px; /* matches your header height */
 }

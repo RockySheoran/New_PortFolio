@@ -1,10 +1,14 @@
-import { Button } from "@components/components/ui/button";
+
 import Image from "next/image";
+import { Navbar } from "../components/all component/Navbar";
+
+import HomePage from "../components/all component/HomePage";
 
 export default function Home() {
   return (
-    <Button>
-      Click me
-    </Button>
+    <>
+    <Navbar/>
+    <HomePage/>
+    </>
   );
 }
