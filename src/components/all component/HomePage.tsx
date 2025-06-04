@@ -4,14 +4,21 @@ import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
-import { Github, Linkedin, Mail, Twitter, ArrowRight } from "lucide-react";
+import { Github, Linkedin, Mail, Twitter, ArrowRight, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
   const { theme } = useTheme();
 
+  const socialLinks = [
+    { icon: Github, label: "GitHub", url: "#" },
+    { icon: Linkedin, label: "LinkedIn", url: "#" },
+    { icon: Twitter, label: "Twitter", url: "#" },
+    { icon: Mail, label: "Email", url: "#" }
+  ];
+
   return (
-    <section id="home" className="min-h-[90vh] w-full flex items-center">
+    <section id="home" className="min-h-[90vh] w-full flex items-center py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Content */}
@@ -69,36 +76,52 @@ export default function HomePage() {
                 View Projects
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
+              
               <Button
                 variant="outline"
                 size="lg"
-                className="rounded-full px-8 border-2 shadow-sm hover:shadow-md transition-shadow"
+                className="rounded-full px-8 border-2 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden"
               >
-                Contact Me
+                <span className="relative z-10 flex items-center">
+                  <FileText className="mr-2 h-5 w-5" />
+                  Download CV
+                </span>
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.4 }}
+                />
               </Button>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
               className="flex justify-center lg:justify-start gap-4 pt-4"
             >
-              {[
-                { icon: Github, label: "GitHub" },
-                { icon: Linkedin, label: "LinkedIn" },
-                { icon: Twitter, label: "Twitter" },
-                { icon: Mail, label: "Email" }
-              ].map((social, index) => (
-                <Button
+              {socialLinks.map((social, index) => (
+                <motion.a
                   key={index}
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-full h-12 w-12 shadow-sm hover:shadow-md hover:bg-accent/50 transition-all"
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -5, scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  className="rounded-full h-12 w-12 flex items-center justify-center shadow-sm hover:shadow-md bg-background hover:bg-accent/50 transition-all border"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
-                </Button>
+                  <motion.span
+                    className="absolute -bottom-8 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity"
+                    initial={{ y: 10 }}
+                    whileHover={{ y: 0 }}
+                  >
+                    {social.label}
+                  </motion.span>
+                </motion.a>
               ))}
             </motion.div>
           </div>
@@ -110,34 +133,24 @@ export default function HomePage() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="hidden lg:block relative w-full h-[32rem]"
           >
-            <div className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl shadow-primary/20">
-              <Image
-                src={theme === "dark" ? "/developer-dark.png" : "/developer-light.png"}
-                alt="Developer Illustration"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            
-            {/* Floating Tech Stack */}
             <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="absolute -bottom-6 -left-6 bg-background/80 backdrop-blur-md p-4 rounded-2xl shadow-xl border"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl shadow-primary/20"
             >
-              <div className="flex flex-wrap gap-2 max-w-[10rem]">
-                {["React", "Next.js", "TypeScript", "Node", "Tailwind", "AWS"].map((tech) => (
-                  <motion.span
-                    key={tech}
-                    whileHover={{ y: -2 }}
-                    className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary shadow-sm"
-                  >
-                    {tech}
-                  </motion.span>
-                ))}
-              </div>
+              <image
+                src="https://drive.google.com/file/d/1HnXHz9wnndM5M2djZnhbw11qvx407CvP/view?usp=drive_link"
+                alt="Developer Illustration"
+               
+                className="object-cover"
+                
+              />
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent pointer-events-none"
+              />
             </motion.div>
           </motion.div>
         </div>
