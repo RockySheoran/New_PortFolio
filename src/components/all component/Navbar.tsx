@@ -292,7 +292,7 @@ export function Navbar() {
                     stiffness: 200
                   }
                 }}
-                className="fixed top-0 right-0 w-[70%] h-screen max-w-xs flex flex-col pt-24 px-5 pb-8 md:hidden bg-background border-l border-purple-500/30 shadow-2xl"
+                className="fixed top-0 right-0 w-[70%] h-[96vh] max-w-xs flex flex-col pt-24 px-5 pb-8 md:hidden bg-background border-l border-purple-500/30 shadow-2xl"
               >
                 <div className="flex-1 flex flex-col gap-3">
                   {sections.map((section, index) => (
