@@ -1,18 +1,19 @@
 export const projects = [
   {
     id: 1,
-    title: "HemoLink",
+    title: "HemoLink(Working)",
     description: "A Decentralized Blood Donation Matching System aims to solve these issues by leveraging technology to connect donors with recipients in real time, ensuring timely availability of blood while preventing fraud and misuse.",
-    tags: ["Next.js", "Redux", "Tailwind CSS"],
+    tags: ["Next.js", "Redux", "Tailwind CSS","Zustand","Shadcn Ui","microservices","SpringBoot","Docker","PostgreSQL","Redis"],
     image: "/image/HemoLink.png",
     github: "https://github.com/RockySheoran/HemoLink",
     live: "https://hemo-link-iota.vercel.app/",
+    work:"Frontend Developer",
     featured: true
   },{
     id: 2,
     title: "Balanc",
     description: "Balanc simplifies money management by tracking expenses, income, and investments in one intuitive platform. Gain real-time insights, visualize spending patterns, and optimize your financial health through smart analytics and personalized dashboards—all designed for effortless financial control.",
-    tags: ["Next.js", "Node.js", "MongoDB", "Express.js", "Redux", "Tailwind CSS","Framer Motion","chart.js"],
+    tags: ["Next.js", "Node.js", "MongoDB", "Express.js","Shadcn Ui", "Redux","Redis", "Tailwind CSS","Framer Motion","chart.js"],
     image: "/image/Balanc.png",
     github: "https://github.com/RockySheoran/Balanc",
     live: "https://balanc.vercel.app/dashboard",
@@ -22,7 +23,8 @@ export const projects = [
     id: 6,
     title: "Portfolio",
     description: "Professional portfolio website showcasing projects and skills with animations.",
-    tags: ["Next.js", "Tailwind CSS", "Framer Motion"],
+    tags: ["Next.js", "Tailwind CSS", "Framer Motion", "Shadcn Ui"],
+    featured: true,
     image: "/image/portfolio.png",
     github: "https://github.com/RockySheoran/New_PortFolio",
     live: "#"

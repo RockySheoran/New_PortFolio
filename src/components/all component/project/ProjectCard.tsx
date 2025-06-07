@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionTemplate, useMotionValue, AnimatePresence } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue, AnimatePresence, useTransform } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { ArrowUpRight, Code, Plus } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -18,13 +18,19 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   
+  // 3D cursor effects
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const mouseXRotate = useTransform(mouseX, [0, 400], [-8, 8]);
+  const mouseYRotate = useTransform(mouseY, [0, 400], [8, -8]);
   
-  const background = useMotionTemplate`radial-gradient(240px at ${mouseX}px ${mouseY}px, var(--accent) 0%, transparent 80%)`;
+  // Lighting effects
+  const background = useMotionTemplate`radial-gradient(350px at ${mouseX}px ${mouseY}px, var(--accent) 0%, transparent 70%)`;
+  const borderGlow = useMotionTemplate`0 0 0 1px rgba(var(--accent-rgb), 0.3), 0 0 30px 0 rgba(var(--accent-rgb), ${isHovered ? 0.3 : 0.1})`;
 
-  // Intersection Observer for better performance
+  // Intersection Observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -33,21 +39,12 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
           observer.unobserve(entry.target);
         }
       },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-      }
+      { threshold: 0.1 }
     );
 
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
+    if (cardRef.current) observer.observe(cardRef.current);
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
+      if (cardRef.current) observer.unobserve(cardRef.current);
     };
   }, []);
 
@@ -68,66 +65,65 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   const imageVariants = {
     hover: {
       scale: 1.05,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut"
-      }
+      transition: { duration: 0.4, ease: "easeOut" }
     }
   };
 
   const tagContainerVariants = {
-    collapsed: {
-      height: 36,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    },
-    expanded: {
-      height: "auto",
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    }
+    collapsed: { height: 36 },
+    expanded: { height: "auto" },
+    transition: { duration: 0.3, ease: "easeOut" }
   };
 
   return (
     <div 
       ref={cardRef}
-      className="h-full w-full group"
+      className="h-full w-full group perspective-1000"
       onMouseMove={(e) => {
         const { left, top } = e.currentTarget.getBoundingClientRect();
         mouseX.set(e.clientX - left);
         mouseY.set(e.clientY - top);
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <Tilt
-        tiltMaxAngleX={5}
-        tiltMaxAngleY={5}
+        tiltMaxAngleX={4}
+        tiltMaxAngleY={4}
         glareEnable={true}
-        glareMaxOpacity={0.1}
+        glareMaxOpacity={0.2}
         glareColor={currentTheme === "dark" ? "#fff" : "#000"}
         glarePosition="all"
         glareBorderRadius="12px"
         transitionSpeed={1000}
         className="h-full"
-        scale={1.02}
+        scale={1.03}
         tiltEnable={typeof window !== 'undefined' && window.innerWidth > 768}
       >
         <motion.div
           variants={cardVariants}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
-          whileHover={{ y: -8 }}
-          className="h-full relative overflow-hidden"
+          style={{
+            rotateX: mouseYRotate,
+            rotateY: mouseXRotate,
+          }}
+          className="h-full relative overflow-hidden transform-style-preserve-3d"
         >
-          <Card className="h-full flex flex-col border-border/50 bg-background/70 dark:bg-background/70 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 group-hover:border-accent/50">
-            {/* Dynamic Gradient Highlight */}
+          <Card className="h-full flex flex-col border-border/50 bg-background/80 dark:bg-background/80 backdrop-blur-sm shadow-2xl hover:shadow-3xl transition-all duration-300 group-hover:border-accent/50">
+            {/* 3D Lighting Effects */}
             <motion.div
-              style={{ background }}
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
+              style={{ 
+                background,
+                boxShadow: borderGlow,
+              }}
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
             />
+            
+            {/* Inner glow effect */}
+            <div className="absolute inset-0 rounded-lg pointer-events-none overflow-hidden">
+              <div className="absolute inset-0 border border-transparent group-hover:border-accent/20 transition-all duration-300" />
+            </div>
 
             {/* Header with Image */}
             <CardHeader className="relative h-48 p-0 overflow-hidden rounded-t-lg">
@@ -156,14 +152,20 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               )}
               
               <div className="relative z-20 p-4 sm:p-6 flex flex-col h-full justify-end">
-                <CardTitle className="text-xl sm:text-2xl font-bold text-white line-clamp-2">
+                <CardTitle className="text-xl sm:text-2xl font-bold text-white line-clamp-2 drop-shadow-lg">
                   {project.title}
                 </CardTitle>
                 {project.featured && (
-                  <Badge variant="secondary" className="mt-2 w-fit">
-                    Featured
+                  <Badge variant="secondary" className="mt-2 w-fit backdrop-blur-sm">
+                    Featured 
                   </Badge>
                 )}
+                {
+                  project.work && project.work !== "null" && 
+                  <Badge variant="secondary" className="mt-2 w-fit backdrop-blur-sm">
+                    {project.work} 
+                  </Badge>
+                }
               </div>
             </CardHeader>
 
@@ -183,8 +185,8 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                 )}>
                   {project.description}
                 </CardDescription>
-                {/* Gradient fade effect for overflow */}
-                <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-background/70 to-transparent pointer-events-none" />
+                {/* Gradient fade effect */}
+                <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-background/90 to-transparent pointer-events-none" />
               </motion.div>
               
               {/* Tags with expand/collapse */}
@@ -239,7 +241,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full">
                 <Button 
                   variant="outline" 
-                  className="flex-1 gap-2 group/code h-10 sm:h-11 py-1" 
+                  className="flex-1 gap-2 group/code h-10 sm:h-11 py-1 backdrop-blur-sm" 
                   asChild
                 >
                   <a 
@@ -249,13 +251,14 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                     aria-label={`View code for ${project.title}`}
                   >
                     <Code className="h-3 w-3 sm:h-4 sm:w-4 group-hover/code:rotate-45 transition-transform" />
-                    <span className="truncate text-xs sm:text-sm">View Code</span>
+                    <span className="truncate text-[15px] sm:text-sm">View Code</span>
+                    <span className="absolute inset-0 rounded-md bg-accent/0 group-hover/code:bg-accent/10 transition-colors duration-300" />
                   </a>
                 </Button>
                 
                 <Button 
                   variant="default" 
-                  className="flex-1 gap-2 group/demo h-10 sm:h-11 py-1"
+                  className="flex-1 gap-2 group/demo h-10 sm:h-11 py-1 relative overflow-hidden"
                   asChild
                 >
                   <a 
@@ -265,7 +268,13 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                     aria-label={`View live demo of ${project.title}`}
                   >
                     <ArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4 group-hover/demo:rotate-45 transition-transform" />
-                    <span className="truncate text-xs sm:text-sm">Live Demo</span>
+                    <span className="truncate text-[15px] sm:text-sm">Live Demo</span>
+                    {/* Button shine effect */}
+                    <motion.span 
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover/demo:opacity-100"
+                      initial={{ x: -100 }}
+                      whileHover={{ x: "100%", transition: { duration: 0.8, repeat: Infinity } }}
+                    />
                   </a>
                 </Button>
               </div>
@@ -275,6 +284,12 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
       </Tilt>
 
       <style jsx global>{`
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        .transform-style-preserve-3d {
+          transform-style: preserve-3d;
+        }
         .custom-scrollbar::-webkit-scrollbar {
           height: 4px;
           width: 4px;
@@ -283,11 +298,11 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
           background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: hsl(var(--muted));
+          background: hsl(var(--accent));
           border-radius: 2px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: hsl(var(--accent));
+          background: hsl(var(--accent)/0.8);
         }
       `}</style>
     </div>
