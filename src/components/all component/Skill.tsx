@@ -163,19 +163,22 @@ export default function SkillsSection() {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [isMobile, setIsMobile] = useState(false);
   const [showAllSkills, setShowAllSkills] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const skillsContainerRef = useRef<HTMLDivElement>(null);
-
+const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
+    setIsMounted(true);
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) setShowAllSkills(false);
     };
-
+    
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+   if (!isMounted) {
+    return null; // or return a skeleton loader
+  }
 
   const filteredSkills =
     activeCategory === "all"
@@ -184,14 +187,24 @@ export default function SkillsSection() {
 
   const displayedSkills =
     isMobile && !showAllSkills ? filteredSkills.slice(0, 9) : filteredSkills;
-    const handleToggleShowAll = () => {
+
+  const handleToggleShowAll = () => {
     if (isAnimating) return;
     
     setIsAnimating(true);
-    setShowAllSkills(!showAllSkills);
-
-    // Scroll to the skills section when showing more
-    if (!showAllSkills && skillsContainerRef.current) {
+    
+    if (showAllSkills) {
+      // For "Show Less", immediately change the button text
+      setShowAllSkills(false);
+      // Wait for skills to animate out before enabling interaction
+      setTimeout(() => setIsAnimating(false), 500);
+    } else {
+      // For "Show More", immediate state change
+      setShowAllSkills(true);
+      // Wait for skills to animate in before enabling interaction
+      setTimeout(() => setIsAnimating(false), 700);
+      
+      // Scroll to skills section after a slight delay
       setTimeout(() => {
         skillsContainerRef.current?.scrollIntoView({
           behavior: "smooth",
@@ -199,15 +212,12 @@ export default function SkillsSection() {
         });
       }, 300);
     }
-
-    setTimeout(() => setIsAnimating(false), 500);
   };
-
 
   return (
     <section
       id="skills"
-      className="w-full py-16 bg-gradient-to-b from-background/50 to-background"
+      className="w-full py-16 bg-gradient-to-b from-background/50 to-background "
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -250,7 +260,7 @@ export default function SkillsSection() {
               setActiveCategory("all");
               setShowAllSkills(false);
             }}
-            className={`px-4 py-2 rounded-full transition-all flex items-center gap-2 border ${
+            className={`px-4 cursor-pointer py-2 rounded-full transition-all flex items-center gap-2 border ${
               activeCategory === "all"
                 ? "bg-primary/10 border-primary text-primary shadow-lg shadow-primary/20"
                 : "bg-muted hover:bg-muted/80 text-muted-foreground border-transparent"
@@ -271,7 +281,7 @@ export default function SkillsSection() {
                 setActiveCategory(category.id);
                 setShowAllSkills(false);
               }}
-              className={`px-4 py-2 rounded-full flex items-center gap-2 transition-all border ${
+              className={`px-4 py-2 cursor-pointer rounded-full flex items-center gap-2 transition-all border ${
                 activeCategory === category.id
                   ? "bg-primary/10 border-primary text-primary shadow-lg shadow-primary/20"
                   : "bg-muted hover:bg-muted/80 text-muted-foreground border-transparent"
@@ -287,14 +297,17 @@ export default function SkillsSection() {
         </motion.div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+        <div 
+          className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
+          ref={skillsContainerRef}
+        >
           <AnimatePresence mode="popLayout">
             {displayedSkills.map((skill, index) => (
               <motion.div
                 key={skill.name}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
+                exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
                 transition={{
                   duration: 0.4,
                   delay: index * 0.03,
@@ -335,67 +348,71 @@ export default function SkillsSection() {
         </div>
 
         {/* Show More Button for Mobile */}
-       {isMobile && filteredSkills.length > 9 && (
-  <motion.div
-    className="mt-8 flex justify-center"
-    initial={{ opacity: 0, y: 10 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.3, ease: "easeOut" }}
-    viewport={{ once: true, margin: "0px 0px -20px 0px" }}
-  >
-    <motion.button
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.97 }}
-      onClick={handleToggleShowAll}
-      disabled={isAnimating}
-      className={`px-6 py-3 rounded-full font-medium flex items-center gap-2 transition-all ${
-        showAllSkills
-          ? "bg-gradient-to-r from-blue-600 to-primary text-white shadow-md hover:shadow-lg"
-          : "bg-background border border-border text-foreground shadow-sm hover:shadow-md"
-      }`}
-      transition={{
-        scale: { duration: 0.15, ease: "easeInOut" },
-        backgroundColor: { duration: 0.2 }
-      }}
-    >
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={showAllSkills ? "less" : "more"}
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -5 }}
-          transition={{ duration: 0.15 }}
-        >
-          {showAllSkills ? "Show Less" : `Show More (${filteredSkills.length - 9}+)`}
-        </motion.span>
-      </AnimatePresence>
-      
-      <motion.div
-        animate={{ rotate: showAllSkills ? 180 : 0 }}
-        transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d={showAllSkills ? "m18 15-6-6-6 6" : "m6 9 6 6 6-6"} />
-        </svg>
-      </motion.div>
-    </motion.button>
-  </motion.div>
-)}
+        {isMobile && filteredSkills.length > 9 && (
+          <motion.div
+            className="mt-8 flex justify-center"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <motion.button
+              layout
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={handleToggleShowAll}
+              disabled={isAnimating}
+              className={`px-6 py-3 rounded-full font-medium flex items-center gap-2 ${
+                showAllSkills
+                  ? "bg-gradient-to-r from-blue-600 to-primary text-white shadow-md"
+                  : "bg-background border border-border text-foreground shadow-sm"
+              }`}
+              transition={{
+                type: "spring",
+                stiffness: 500,
+                damping: 30
+              }}
+            >
+              <motion.span
+                key={showAllSkills ? "less" : "more"}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                {showAllSkills ? "Show Less" : `Show More (${filteredSkills.length - 9}+)`}
+              </motion.span>
+              
+              <motion.div
+                animate={{ rotate: showAllSkills ? 180 : 0 }}
+                transition={{ 
+                  duration: 0.3,
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 20
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d={showAllSkills ? "m18 15-6-6-6 6" : "m6 9 6 6 6-6"} />
+                </svg>
+              </motion.div>
+            </motion.button>
+          </motion.div>
+        )}
       </div>
     </section>
   );
 }
-
 // "use client";
 
 // import { motion, useInView } from "framer-motion";
