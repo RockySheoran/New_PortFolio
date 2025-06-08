@@ -6,16 +6,17 @@ import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { Github, Linkedin, Mail, Twitter, ArrowRight, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SiLeetcode } from "react-icons/si";
 // import Particles from "../Particles/Particles";
 
 export default function HomePage() {
   const { theme } = useTheme();
 
   const socialLinks = [
-    { icon: Github, label: "GitHub", url: "https://github.com/rockysheoran" },
-    { icon: Linkedin, label: "LinkedIn", url: "https://linkedin.com/in/rockysheoran" },
-    { icon: Twitter, label: "Twitter", url: "https://twitter.com/rockysheoran" },
-    { icon: Mail, label: "Email", url: "mailto:rocky@example.com" }
+    { icon: Github, label: "GitHub", url: "https://github.com/RockySheoran" },
+    { icon: Linkedin, label: "LinkedIn", url: "https://www.linkedin.com/in/rocky-77a984267" },
+    { icon: SiLeetcode, label: "LeetCode", url: "https://leetcode.com/u/rockysheoran72/" }, 
+    { icon: Mail, label: "Email", url: "mailto:rockysheoran72@example.com" }
   ];
 
   return (
@@ -85,6 +86,7 @@ export default function HomePage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="flex flex-wrap gap-4 justify-center lg:justify-start"
             >
+              <a href="#projects">
               <Button
                 size="lg"
                 className="rounded-full px-8 shadow-lg hover:shadow-xl hover:shadow-primary/30 transition-all group bg-gradient-to-r from-primary to-purple-600 text-white"
@@ -92,6 +94,7 @@ export default function HomePage() {
                 View Projects
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:scale-110" />
               </Button>
+              </a>
               
               <Button
                 variant="outline"
