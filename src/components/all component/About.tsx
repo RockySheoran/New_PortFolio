@@ -18,7 +18,7 @@ export default function AboutSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-            About <span className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">Rocky</span>
+            About <span className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">Me</span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
             Full Stack Developer specializing in modern web technologies

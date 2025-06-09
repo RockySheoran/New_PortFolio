@@ -141,6 +141,25 @@ export const ContactSection = () => {
 
       <div className="max-w-6xl mx-auto">
         {/* ... existing header section ... */}
+        
+        <motion.div 
+        className="text-center mb-16"
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <Badge variant="outline" className="mb-4">
+          Get in touch
+        </Badge>
+        <h2 className="text-4xl font-bold tracking-tight mb-4">
+          Let's work <span className="text-primary">together</span>
+        </h2>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Have a project in mind or want to discuss potential opportunities? 
+          Feel free to reach out through the form or contact me directly.
+        </p>
+      </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Contact Form */}

@@ -132,7 +132,7 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   className={cn(
-                    "relative text-sm font-medium px-4 py-2 rounded-xl group transition-all",
+                    "relative cursor-pointer text-sm font-medium px-4 py-2 rounded-xl group transition-all",
                     activeSection === section.id 
                       ? "text-white font-semibold" 
                       : "text-foreground/80 hover:text-foreground"

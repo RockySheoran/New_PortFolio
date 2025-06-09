@@ -87,7 +87,7 @@ const ProjectsSection = () => {
           <Button
             asChild
             size="lg"
-            className="rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl px-8 py-6"
+            className="rounded-xl text-md sm:text-lg font-semibold shadow-lg hover:shadow-xl px-8 py-6"
           >
             <a href="#contact">
               Let's Build Something Together

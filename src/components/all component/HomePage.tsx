@@ -18,7 +18,7 @@ export default function HomePage() {
     { icon: SiLeetcode, label: "LeetCode", url: "https://leetcode.com/u/rockysheoran72/" }, 
     { icon: Mail, label: "Email", url: "mailto:rockysheoran72@example.com" }
   ];
-
+const resume = "/certificates/rocky-resume.pdf"
   return (
      <div className="">
      {/* <div style={{ width: '100vw', height: '100vh', position: 'relative' }} className="inset-0 -z-10">
@@ -74,10 +74,7 @@ export default function HomePage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed"
             >
-              I transform ideas into exceptional digital experiences using modern web technologies. 
-              With expertise in <span className="font-medium text-primary">React</span>, <span className="font-medium text-primary">Next.js</span>, 
-              and <span className="font-medium text-primary">Node.js</span>, I build fast, scalable, and beautiful web applications 
-              that deliver real business value.
+              A passionate Fullstack Developer with creative thinking. Loves creating sleek designs and best softwares out of the box, I always wanna make products the best and most efficient. 
             </motion.p>
 
             <motion.div
@@ -89,7 +86,7 @@ export default function HomePage() {
               <a href="#projects">
               <Button
                 size="lg"
-                className="rounded-full px-8 shadow-lg hover:shadow-xl hover:shadow-primary/30 transition-all group bg-gradient-to-r from-primary to-purple-600 text-white"
+                className="rounded-full cursor-pointer px-8 shadow-lg hover:shadow-xl hover:shadow-primary/30 transition-all group bg-gradient-to-r from-primary to-purple-600 text-white"
               >
                 View Projects
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:scale-110" />
@@ -99,7 +96,8 @@ export default function HomePage() {
               <Button
                 variant="outline"
                 size="lg"
-                className="rounded-full px-8 border-2 border-primary/50 shadow-sm hover:shadow-md transition-all group relative overflow-hidden"
+                onClick={() => window.open(resume, '_blank')}
+                className="rounded-full px-8 cursor-pointer border-2 border-primary/50 shadow-sm hover:shadow-md transition-all group relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center">
                   <FileText className="mr-2 h-5 w-5 text-primary" />
@@ -114,6 +112,7 @@ export default function HomePage() {
                   transition={{ duration: 0.4 }}
                 />
               </Button>
+             
             </motion.div>
 
             <motion.div
@@ -160,7 +159,7 @@ export default function HomePage() {
               className="absolute inset-0 rounded-[3rem] overflow-hidden shadow-2xl shadow-primary/30"
             >
               <Image
-                src="/rocky.jpg"
+                src="/my1.jpg"
                 alt="Rocky Sheoran - Full Stack Developer"
                 width={600}
                 height={800}

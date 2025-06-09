@@ -19,6 +19,8 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTapped, setIsTapped] = useState(false);
   
   // 3D cursor effects
   const mouseX = useMotionValue(0);
@@ -28,7 +30,18 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   
   // Lighting effects
   const background = useMotionTemplate`radial-gradient(350px at ${mouseX}px ${mouseY}px, var(--accent) 0%, transparent 70%)`;
-  const borderGlow = useMotionTemplate`0 0 0 1px rgba(var(--accent-rgb), 0.3), 0 0 30px 0 rgba(var(--accent-rgb), ${isHovered ? 0.3 : 0.1})`;
+  const borderGlow = useMotionTemplate`0 0 0 1px rgba(var(--accent-rgb), 0.3), 0 0 30px 0 rgba(var(--accent-rgb), ${isHovered || isTapped ? 0.3 : 0.1})`;
+
+  // Check if mobile on mount
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
 
   // Intersection Observer
   useEffect(() => {
@@ -48,15 +61,22 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
     };
   }, []);
 
+  // Handle mobile tap
+  const handleTap = () => {
+    if (isMobile) {
+      setIsTapped(!isTapped);
+    }
+  };
+
   // Animations
   const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        delay: index * 0.08,
-        duration: 0.6,
+        delay: index * 0.05,
+        duration: 0.5,
         ease: [0.16, 1, 0.3, 1]
       }
     }
@@ -66,6 +86,10 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
     hover: {
       scale: 1.05,
       transition: { duration: 0.4, ease: "easeOut" }
+    },
+    tap: {
+      scale: 0.98,
+      transition: { duration: 0.2 }
     }
   };
 
@@ -78,55 +102,66 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   return (
     <div 
       ref={cardRef}
-      className="h-full w-full group perspective-1000"
+      className="h-full w-full group"
       onMouseMove={(e) => {
-        const { left, top } = e.currentTarget.getBoundingClientRect();
-        mouseX.set(e.clientX - left);
-        mouseY.set(e.clientY - top);
+        if (!isMobile) {
+          const { left, top } = e.currentTarget.getBoundingClientRect();
+          mouseX.set(e.clientX - left);
+          mouseY.set(e.clientY - top);
+        }
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
+      onMouseLeave={() => !isMobile && setIsHovered(false)}
+      onClick={handleTap}
     >
       <Tilt
-        tiltMaxAngleX={4}
-        tiltMaxAngleY={4}
-        glareEnable={true}
+        tiltMaxAngleX={isMobile ? (isTapped ? 10 : 0) : 4}
+        tiltMaxAngleY={isMobile ? (isTapped ? 10 : 0) : 4}
+        glareEnable={!isMobile || isTapped}
         glareMaxOpacity={0.2}
         glareColor={currentTheme === "dark" ? "#fff" : "#000"}
         glarePosition="all"
         glareBorderRadius="12px"
         transitionSpeed={1000}
         className="h-full"
-        scale={1.03}
-        tiltEnable={typeof window !== 'undefined' && window.innerWidth > 768}
+        scale={isMobile ? 1 : 1.03}
+        tiltEnable={!isMobile || isTapped}
       >
         <motion.div
           variants={cardVariants}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           style={{
-            rotateX: mouseYRotate,
-            rotateY: mouseXRotate,
+            rotateX: isMobile ? (isTapped ? mouseYRotate : 0) : mouseYRotate,
+            rotateY: isMobile ? (isTapped ? mouseXRotate : 0) : mouseXRotate,
           }}
           className="h-full relative overflow-hidden transform-style-preserve-3d"
         >
-          <Card className="h-full flex flex-col border-border/50 bg-background/80 dark:bg-background/80 backdrop-blur-sm shadow-2xl hover:shadow-3xl transition-all duration-300 group-hover:border-accent/50">
+          <Card className="h-full flex flex-col border-border/50 bg-background/80 dark:bg-background/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 group-hover:border-accent/50">
             {/* 3D Lighting Effects */}
             <motion.div
               style={{ 
                 background,
                 boxShadow: borderGlow,
               }}
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
+              className={`absolute inset-0 ${
+                isMobile 
+                  ? isTapped ? "opacity-100" : "opacity-0" 
+                  : "opacity-0 group-hover:opacity-100"
+              } transition-opacity duration-500 pointer-events-none z-0`}
             />
             
             {/* Inner glow effect */}
             <div className="absolute inset-0 rounded-lg pointer-events-none overflow-hidden">
-              <div className="absolute inset-0 border border-transparent group-hover:border-accent/20 transition-all duration-300" />
+              <div className={`absolute inset-0 border ${
+                isMobile && isTapped 
+                  ? "border-accent/30" 
+                  : "border-transparent group-hover:border-accent/20"
+              } transition-all duration-300`} />
             </div>
 
             {/* Header with Image */}
-            <CardHeader className="relative h-48 p-0 overflow-hidden rounded-t-lg">
+            <CardHeader className="relative h-40 sm:h-48 p-0 overflow-hidden rounded-t-lg">
               <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent opacity-90 z-10" />
               
               {project.image ? (
@@ -134,6 +169,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                   className="absolute inset-0 w-full h-full"
                   initial="initial"
                   whileHover="hover"
+                  whileTap="tap"
                   variants={imageVariants}
                 >
                   <Image
@@ -151,21 +187,22 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                 <Skeleton className="w-full h-full" />
               )}
               
-              <div className="relative z-20 p-4 sm:p-6 flex flex-col h-full justify-end">
-                <CardTitle className="text-xl sm:text-2xl font-bold text-white line-clamp-2 drop-shadow-lg">
+              <div className="relative z-20 p-4 flex flex-col h-full justify-end">
+                <CardTitle className="text-lg sm:text-2xl font-bold text-white line-clamp-2 drop-shadow-lg">
                   {project.title}
                 </CardTitle>
-                {project.featured && (
-                  <Badge variant="secondary" className="mt-2 w-fit backdrop-blur-sm">
-                    Featured 
-                  </Badge>
-                )}
-                {
-                  project.work && project.work !== "null" && 
-                  <Badge variant="secondary" className="mt-2 w-fit backdrop-blur-sm">
-                    {project.work} 
-                  </Badge>
-                }
+                <div className="flex flex-wrap gap-1 mt-1 sm:mt-2">
+                  {project.featured && (
+                    <Badge variant="secondary" className="text-xs sm:text-sm backdrop-blur-sm">
+                      Featured 
+                    </Badge>
+                  )}
+                  {project.work && project.work !== "null" && 
+                    <Badge variant="secondary" className="text-xs sm:text-sm backdrop-blur-sm">
+                      {project.work} 
+                    </Badge>
+                  }
+                </div>
               </div>
             </CardHeader>
 
@@ -173,15 +210,15 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
             <CardContent className="p-4 sm:p-6 flex-1 flex flex-col">
               {/* Description with smooth scrolling */}
               <motion.div
-                className="relative mb-3 sm:mb-4"
-                initial={{ height: 96 }}
+                className="relative mb-2 sm:mb-4"
+                initial={{ height: 72 }}
                 animate={{ height: "auto" }}
                 transition={{ duration: 0.3 }}
               >
                 <CardDescription className={cn(
-                  "text-foreground/80 text-sm sm:text-base pr-2",
+                  "text-foreground/80 text-xs sm:text-base pr-1 sm:pr-2",
                   "overflow-y-auto custom-scrollbar",
-                  "max-h-[96px] sm:max-h-[120px]"
+                  "max-h-[72px] sm:max-h-[120px]"
                 )}>
                   {project.description}
                 </CardDescription>
@@ -190,13 +227,13 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               </motion.div>
               
               {/* Tags with expand/collapse */}
-              <div className="mb-3 sm:mb-4">
+              <div className="mb-2 sm:mb-4">
                 <motion.div
                   variants={tagContainerVariants}
                   animate={showAllTags ? "expanded" : "collapsed"}
                   className="relative overflow-hidden"
                 >
-                  <div className="flex flex-wrap gap-2 py-1 pr-2">
+                  <div className="flex flex-wrap gap-1 sm:gap-2 py-1 pr-1 sm:pr-2">
                     <AnimatePresence>
                       {project.tags.map((tag: string, i: number) => (
                         <motion.div
@@ -220,8 +257,11 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                 
                 {project.tags.length > 3 && (
                   <motion.button
-                    onClick={() => setShowAllTags(!showAllTags)}
-                    className="mt-2 flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowAllTags(!showAllTags);
+                    }}
+                    className="mt-1 sm:mt-2 flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
                     whileTap={{ scale: 0.95 }}
                   >
                     <motion.span
@@ -238,11 +278,12 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
 
             {/* Footer with Buttons */}
             <CardFooter className="p-4 sm:p-6 pt-0">
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full">
+              <div className="flex flex-col sm:flex-row gap-2 w-full">
                 <Button 
                   variant="outline" 
-                  className="flex-1 gap-2 group/code h-10 sm:h-11 py-1 backdrop-blur-sm" 
+                  className="flex-1 gap-1 sm:gap-2 group/code h-9 sm:h-11 py-1 backdrop-blur-sm text-xs sm:text-sm" 
                   asChild
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <a 
                     href={project.github} 
@@ -251,15 +292,16 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                     aria-label={`View code for ${project.title}`}
                   >
                     <Code className="h-3 w-3 sm:h-4 sm:w-4 group-hover/code:rotate-45 transition-transform" />
-                    <span className="truncate text-[15px] sm:text-sm">View Code</span>
+                    <span className="truncate">View Code</span>
                     <span className="absolute inset-0 rounded-md bg-accent/0 group-hover/code:bg-accent/10 transition-colors duration-300" />
                   </a>
                 </Button>
                 
                 <Button 
                   variant="default" 
-                  className="flex-1 gap-2 group/demo h-10 sm:h-11 py-1 relative overflow-hidden"
+                  className="flex-1 gap-1 sm:gap-2 group/demo h-9 sm:h-11 py-1 relative overflow-hidden text-xs sm:text-sm"
                   asChild
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <a 
                     href={project.live} 
@@ -268,7 +310,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                     aria-label={`View live demo of ${project.title}`}
                   >
                     <ArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4 group-hover/demo:rotate-45 transition-transform" />
-                    <span className="truncate text-[15px] sm:text-sm">Live Demo</span>
+                    <span className="truncate">Live Demo</span>
                     {/* Button shine effect */}
                     <motion.span 
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover/demo:opacity-100"
@@ -284,15 +326,12 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
       </Tilt>
 
       <style jsx global>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
         .transform-style-preserve-3d {
           transform-style: preserve-3d;
         }
         .custom-scrollbar::-webkit-scrollbar {
-          height: 4px;
-          width: 4px;
+          height: 3px;
+          width: 3px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
           background: transparent;
