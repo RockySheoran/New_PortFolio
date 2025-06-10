@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export default function AboutSection() {
-  const resume = "/certificates/rocky-resume1.pdf";
+  const resume = "/rocky-resume.pdf";
   return (
     <section
       id="about"

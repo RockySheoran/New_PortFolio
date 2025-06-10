@@ -18,7 +18,7 @@ export default function HomePage() {
     { icon: SiLeetcode, label: "LeetCode", url: "https://leetcode.com/u/rockysheoran72/" }, 
     { icon: Mail, label: "Email", url: "mailto:rockysheoran72@example.com" }
   ];
-const resume = "/certificates/rocky-resume1.pdf"
+const resume = "/rocky-resume.pdf"
   return (
      <div className="">
      {/* <div style={{ width: '100vw', height: '100vh', position: 'relative' }} className="inset-0 -z-10">
