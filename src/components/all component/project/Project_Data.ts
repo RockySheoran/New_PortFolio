@@ -4,7 +4,7 @@ export const projects = [
     title: "HemoLink(Working)",
     description: "A Decentralized Blood Donation Matching System aims to solve these issues by leveraging technology to connect donors with recipients in real time, ensuring timely availability of blood while preventing fraud and misuse.",
     tags: ["Next.js", "Redux", "Tailwind CSS","Zustand","Shadcn Ui","microservices","SpringBoot","Docker","PostgreSQL","Redis"],
-    image: "/image/HemoLink1.png",
+    image: "/image/hemo.png",
     github: "https://github.com/RockySheoran/HemoLink",
     live: "https://hemo-link-iota.vercel.app/",
     work:"Frontend Developer",
@@ -25,7 +25,7 @@ export const projects = [
     description: "Professional portfolio website showcasing projects and skills with animations.",
     tags: ["Next.js", "Tailwind CSS", "Framer Motion", "Shadcn Ui"],
     featured: true,
-    image: "/image/portfolio.png",
+    image: "/image/portfolio1.png",
     github: "https://github.com/RockySheoran/New_PortFolio",
     live: "#"
   },

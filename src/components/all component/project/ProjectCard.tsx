@@ -162,7 +162,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
 
             {/* Header with Image */}
             <CardHeader className="relative h-40 sm:h-48 p-0 overflow-hidden rounded-t-lg">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent opacity-90 z-10" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent opacity-50 z-10" />
               
               {project.image ? (
                 <motion.div 
@@ -187,7 +187,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                 <Skeleton className="w-full h-full" />
               )}
               
-              <div className="relative z-20 p-4 flex flex-col h-full justify-end">
+              <div className="relative z-100 p-4 flex flex-col h-full justify-end">
                 <CardTitle className="text-lg sm:text-2xl font-bold text-white line-clamp-2 drop-shadow-lg">
                   {project.title}
                 </CardTitle>
