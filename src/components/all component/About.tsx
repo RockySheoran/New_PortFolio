@@ -99,7 +99,10 @@ export default function AboutSection() {
                 
                 variant="outline"
                 className="rounded-full cursor-pointer px-8 border-primary/50 hover:border-primary group relative overflow-hidden mt-8"
-                onClick={() => window.open(resume, "_blank")}
+               onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(resume, "_blank");
+                  }}
               >
                 <span className="relative z-10 flex items-center">
                   <FileText className="mr-2 h-5 w-5 text-primary" />
