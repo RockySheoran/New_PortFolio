@@ -34,6 +34,7 @@ export default function HomePage() {
     { icon: Mail, label: "Email", url: "mailto:rockysheoran72@example.com" },
   ];
   const resume = "/image/Rocky.pdf";
+  
   return (
     <div className="">
       {/* <div style={{ width: '100vw', height: '100vh', position: 'relative' }} className="inset-0 -z-10">
