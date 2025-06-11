@@ -34,7 +34,7 @@ export default function HomePage() {
     { icon: Mail, label: "Email", url: "mailto:rockysheoran72@example.com" },
   ];
   const resume = "/image/Rocky.pdf";
-  
+
   return (
     <div className="">
       {/* <div style={{ width: '100vw', height: '100vh', position: 'relative' }} className="inset-0 -z-10">
@@ -150,17 +150,19 @@ export default function HomePage() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ y: -5, scale: 1.1 }}
+                    whileHover={{ y: -5, scale: 1.1, rotate: 90 }}
                     whileTap={{ scale: 0.9 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                     className="relative rounded-full h-12 w-12 flex items-center justify-center shadow-sm hover:shadow-md bg-background hover:bg-accent/50 transition-all border border-muted"
                     aria-label={social.label}
+                    title={"Follow me on " + social.label}
                   >
                     <social.icon className="h-5 w-5 text-primary" />
                     <motion.span
                       className="absolute -bottom-8 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity bg-background px-2 py-1 rounded-full shadow-sm"
                       initial={{ y: 10 }}
                       whileHover={{ y: 0 }}
+                      aria-label={social.label}
                     >
                       {social.label}
                     </motion.span>

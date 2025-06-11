@@ -8,6 +8,7 @@ import {
   Lightbulb,
   FileText,
   BrainCircuit,
+  Brain,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -85,6 +86,10 @@ export default function AboutSection() {
                 <div className="flex items-center gap-3">
                   <BookOpen className="h-5 w-5 text-purple-500" />
                   <span>Continuous Learner</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Brain className="h-5 w-5 text-green-500" />
+                  <span>DSA in JAVA</span>
                 </div>
               </motion.div>
             </div>
