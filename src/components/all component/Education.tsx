@@ -104,7 +104,8 @@ export const EducationSection = () => {
         style={{ opacity, y, scale }}
         className="absolute inset-0 -z-10"
       >
-        <div className={`absolute inset-0 opacity-20 ${theme === 'dark' ? 'bg-[url(/grid-dark.svg)]' : 'bg-[url(/grid.svg)]'}`} />
+        <div className={`absolute inset-0 opacity-20 `} />
+        {/* ${theme === 'dark' ? 'bg-[url(/grid-dark.svg)]' : 'bg-[url(/grid.svg)]'} */}
         <motion.div 
           animate={{
             x: [0, 100, 0],
