@@ -78,6 +78,9 @@ export default function HomePage() {
                       1500,
                       "Web Developer",
                       1500,
+                      "Problem Solver",
+                      1500,
+
                     ]}
                     wrapper="span"
                     speed={50}
