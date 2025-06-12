@@ -335,7 +335,7 @@ export const ContactSection = () => {
                           className="h-auto p-0 text-base group-hover:text-primary transition-colors"
                           asChild
                         >
-                          <a href={method.action} target="_blank" rel="noopener noreferrer">
+                          <a href={method.action} target="_blank" rel="noopener noreferrer" className="text-sm">
                             {method.value}
                           </a>
                         </Button>
@@ -352,7 +352,7 @@ export const ContactSection = () => {
                 <CardTitle>Connect With Me</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-3">
+                <div className="grid flex-wrap gap-3  grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   {socialLinks.map((social, index) => (
                     <motion.a
                       key={index}

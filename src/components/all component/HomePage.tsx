@@ -64,7 +64,7 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
+                <h1 className="text-4xl sm:text-5xl mt-10 lg:text-6xl font-bold tracking-tight">
                   Hi, I'm{" "}
                   <span className="text-primary animate-pulse">
                     Rocky Sheoran

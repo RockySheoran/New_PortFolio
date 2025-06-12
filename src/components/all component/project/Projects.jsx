@@ -89,7 +89,7 @@ const ProjectsSection = () => {
             size="lg"
             className="rounded-xl text-md sm:text-lg font-semibold shadow-lg hover:shadow-xl px-8 py-6"
           >
-            <a href="#contact">
+            <a href="#contact" className="text-sm">
               Let's Build Something Together
               <ArrowUpRight className="ml-3 h-5 w-5" />
             </a>
