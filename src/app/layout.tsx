@@ -8,6 +8,13 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+
+// Add a waving hand emoji image to the top left corner of the page
+const handImageUrl = "https://em-content.zobj.net/source/microsoft-teams/337/waving-hand_1f44b.png";
+
+
+
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -15,7 +22,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "PortFolio",
-
+  description: "PortFolio",
+  icons: {
+    icon: [
+      // { url: '/favicon.ico', sizes: 'any' },
+      { url: handImageUrl, type: 'image/png', sizes: '2x2' },
+    ],
+    shortcut: [
+      { url: handImageUrl, type: 'image/png' },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -35,7 +51,7 @@ export default function RootLayout({
           // disableTransitionOnChange
         >
           <main
-           className="w-screen overflow-x-hidden"
+           className="w-[100vw] overflow-x-hidden"
            >
 
         {children}

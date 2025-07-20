@@ -12,6 +12,9 @@ import {
   Settings,
   Box,
   Network,
+  Brain,
+  FileSearch,
+  Link2,
 } from "lucide-react";
 import {
   SiExpress,
@@ -98,6 +101,27 @@ const skills = [
     icon: <SiWebcomponentsdotorg className="h-6 w-6 text-indigo-400" />,
     category: "backend",
   },
+  // AI/ML
+  {
+    name: "LLM",
+    icon: <Brain className="h-6 w-6 text-purple-500" />,
+    category: "ai",
+  },
+  {
+    name: "RAG",
+    icon: <FileSearch className="h-6 w-6 text-blue-500" />,
+    category: "ai",
+  },
+  {
+    name: "LangChain",
+    icon: <Link2 className="h-6 w-6 text-green-500" />,
+    category: "ai",
+  },
+  {
+    name: "MCP Server",
+    icon: <Server className="h-6 w-6 text-orange-500" />,
+    category: "backend",
+  },
   // Databases
   {
     name: "MongoDB",
@@ -157,6 +181,11 @@ const categories = [
     icon: <Languages className="h-5 w-5" />,
   },
   { id: "tool", name: "Tools", icon: <Settings className="h-5 w-5" /> },
+  {
+    id: "ai",
+    name: "AI/ML",
+    icon: <Brain className="h-5 w-5" />,
+  },
 ];
 
 export default function SkillsSection() {
@@ -247,7 +276,7 @@ const [isMounted, setIsMounted] = useState(false);
 
         {/* Category Filter */}
         <motion.div
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="  flex-wrap flex justify-center  gap-2 sm:gap-4 mb-12 "
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ staggerChildren: 0.1 }}
@@ -260,7 +289,7 @@ const [isMounted, setIsMounted] = useState(false);
               setActiveCategory("all");
               setShowAllSkills(false);
             }}
-            className={`px-4 cursor-pointer py-2 rounded-full transition-all flex items-center gap-2 border ${
+            className={` px-4 cursor-pointer py-2 rounded-full transition-all flex items-center gap-2 border ${
               activeCategory === "all"
                 ? "bg-primary/10 border-primary text-primary shadow-lg shadow-primary/20"
                 : "bg-muted hover:bg-muted/80 text-muted-foreground border-transparent"
@@ -281,7 +310,7 @@ const [isMounted, setIsMounted] = useState(false);
                 setActiveCategory(category.id);
                 setShowAllSkills(false);
               }}
-              className={`px-4 py-2 cursor-pointer rounded-full flex items-center gap-2 transition-all border ${
+              className={` px-2 sm:px-4 py-2 cursor-pointer rounded-full flex items-center gap-2 transition-all border ${
                 activeCategory === category.id
                   ? "bg-primary/10 border-primary text-primary shadow-lg shadow-primary/20"
                   : "bg-muted hover:bg-muted/80 text-muted-foreground border-transparent"
@@ -413,6 +442,24 @@ const [isMounted, setIsMounted] = useState(false);
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // "use client";
 
 // import { motion, useInView } from "framer-motion";
