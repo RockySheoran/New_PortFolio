@@ -21,8 +21,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PortFolio",
-  description: "PortFolio",
+  title: "Rocky PortFolio",
+  description: "Rocky PortFolio",
   icons: {
     icon: [
       // { url: '/favicon.ico', sizes: 'any' },
