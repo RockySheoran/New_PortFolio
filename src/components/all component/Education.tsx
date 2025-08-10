@@ -40,7 +40,7 @@ export const EducationSection = () => {
       institution: "College of Engineering, Chandigarh Group of Colleges",
       location: "Landran, Punjab",
       duration: "2022 – 2026",
-      score: "CGPA: 7.55/10",
+      score: "CGPA: 7.67/10",
       achievements: [
         "College Hackathon participant",
         "Contributed to Girl Script Summer of Code 2024 Extended"

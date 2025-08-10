@@ -8,17 +8,19 @@ import SkillsSection from "@/components/all component/Skill";
 import ProjectsSection from "@/components/all component/project/Projects";
 import { EducationSection } from "@/components/all component/Education";
 import { ContactSection } from "@/components/all component/ContactSection";
+import { StatsSection } from "@/components/all component/StatsSection";
 
 
 
 export default function Home() {
   return (
-    <>
+    <div className=" overflow-hidden">
     <Navbar/>
     <HomePage/>
     <AboutSection/>
     <SkillsSection/>
     <ProjectsSection/>
+    <StatsSection/>
     <EducationSection />
     <ContactSection/>
     <footer className="w-full py-3 border-t border-neutral-100 dark:border-neutral-800 transition-colors">
@@ -33,6 +35,6 @@ export default function Home() {
       </div>
     </footer>
  
-    </>
+    </div>
   );
 }
