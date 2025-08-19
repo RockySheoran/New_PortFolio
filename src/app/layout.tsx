@@ -51,7 +51,7 @@ export default function RootLayout({
           // disableTransitionOnChange
         >
           <main
-           className="w-[100vw] overflow-hidden"
+           className="w-full max-w-full overflow-x-hidden"
            >
 
         {children}

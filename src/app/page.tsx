@@ -14,7 +14,7 @@ import { StatsSection } from "@/components/all component/StatsSection";
 
 export default function Home() {
   return (
-    <div className=" overflow-hidden">
+    <div className=" overflow-x-hidden">
     <Navbar/>
     <HomePage/>
     <AboutSection/>

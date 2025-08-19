@@ -20,7 +20,7 @@ export const GitHubContributions: React.FC<GitHubContributionsProps> = ({ userna
       </div>
       <div className="overflow-x-auto">
         <Image
-          src={`https://ghchart.rshah.org/${username}?theme=${isDark ? 'dracula' : 'fresh-green'}`}
+          src={`https://ghchart.rshah.org/${username}?theme=${isDark ? 'dark' : 'white'}`}
           alt={`${username}'s GitHub contributions`}
           width={1100}  // Approximate width of the chart
           height={200}
