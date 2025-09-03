@@ -1,12 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import ProjectCard from "./ProjectCard";
 import {projects} from "./Project_Data"; // Adjust the import path as necessary
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
+import { useIsMd } from "./useMediaQuery";
 
 const ProjectsSection = () => {
+  const [showAll, setShowAll] = useState(false);
+  const isMd = useIsMd();
+  
+  // Determine how many projects to show initially
+  const initialProjectCount = isMd ? 7 : 4;
+  const displayedProjects = showAll ? projects : projects.slice(0, initialProjectCount);
+  const hasMoreProjects = projects.length > initialProjectCount;
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -67,14 +77,44 @@ const ProjectsSection = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {projects.map((project, index) => (
+          {displayedProjects.map((project, index) => (
             <ProjectCard 
-              key={project.id} 
+              key={project?.id} 
               project={project} 
               index={index}
             />
           ))}
         </motion.div>
+
+        {/* See More / Show Less Button */}
+        {hasMoreProjects && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <Button
+              onClick={() => setShowAll(!showAll)}
+              variant="outline"
+              size="lg"
+              className="rounded-xl text-md font-semibold shadow-md hover:shadow-lg px-8 py-3 transition-all duration-300"
+            >
+              {showAll ? (
+                <>
+                  Show Less
+                  <ChevronUp className="ml-2 h-5 w-5" />
+                </>
+              ) : (
+                <>
+                  See More Projects
+                  <ChevronDown className="ml-2 h-5 w-5" />
+                </>
+              )}
+            </Button>
+          </motion.div>
+        )}
 
         {/* CTA Button */}
         <motion.div

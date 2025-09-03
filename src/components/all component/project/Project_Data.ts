@@ -1,7 +1,18 @@
 export const projects = [
-  {
+  ,{
     id: 1,
-    title: "HemoLink(Working)",
+    title: "StudyAI",
+    description: "StudyAI revolutionizes learning with intelligent AI tutoring that adapts to your needs. Features include instant PDF summarization, personalized interview preparation, adaptive knowledge testing, and real-time current affairs updates. Built with advanced AI to deliver efficient, personalized education experiences that accelerate your learning journey.",
+    tags: ["Next.js","Gemini","Langchain","BullMQ", "Zustand", "Tailwind CSS","Shadcn Ui","Node.js","Express.js","MongoDB","TypeScript","Redis"],
+    image: "/image/studyai.png",
+    github: "https://github.com/RockySheoran/StudyAI",
+    live: "https://study-ai-assist.vercel.app/",
+    work:"Full Stack Developer(Group Project)",
+    featured: true
+  },
+  {
+    id: 2,
+    title: "HemoLink(Working stop)",
     description: "A Decentralized Blood Donation Matching System aims to solve these issues by leveraging technology to connect donors with recipients in real time, ensuring timely availability of blood while preventing fraud and misuse.",
     tags: ["Next.js", "Redux", "Tailwind CSS","Zustand","Shadcn Ui","microservices","SpringBoot","Docker","PostgreSQL","Redis"],
     image: "/image/hemo.png",
@@ -10,17 +21,18 @@ export const projects = [
     work:"Frontend Developer",
     featured: true
   },{
-    id: 2,
+    id: 3,
     title: "Balanc",
     description: "Balanc simplifies money management by tracking expenses, income, and investments in one intuitive platform. Gain real-time insights, visualize spending patterns, and optimize your financial health through smart analytics and personalized dashboards—all designed for effortless financial control.",
     tags: ["Next.js", "Node.js", "MongoDB", "Express.js","Shadcn Ui", "Redux","Redis", "Tailwind CSS","Framer Motion","chart.js"],
     image: "/image/Balanc.png",
     github: "https://github.com/RockySheoran/Balanc",
     live: "https://balanc.vercel.app/dashboard",
+    work:"Full Stack Developer",
     featured: true
   },
   {
-    id: 6,
+    id: 4,
     title: "Portfolio",
     description: "Professional portfolio website showcasing projects and skills with animations.",
     tags: ["Next.js", "Tailwind CSS", "Framer Motion", "Shadcn Ui"],
@@ -30,7 +42,7 @@ export const projects = [
     live: "#"
   },
   {
-    id: 3,
+    id: 5,
     title: "FoodDel",
     description: "A food delivery app showcasing seamless ordering, real-time tracking, and quick delivery for a smooth user experience.",
     tags: ["React", "Node.js", "MongoDB", "Express.js", "Redux", "Tailwind CSS"],
@@ -40,7 +52,7 @@ export const projects = [
     featured: true
   },
   {
-    id: 4,
+    id: 6,
     title: "Job Portal",
     description: "A platform where users can apply for jobs and admins can manage jobs and candidates efficiently.",
     tags: ["React", "Node.js", "MongoDB", "Express.js", "Redux", "Tailwind CSS"],
@@ -50,7 +62,7 @@ export const projects = [
     featured: true
   },
   {
-    id: 5,
+    id: 7,
     title: "Real Time Chat Application",
     description: "One-to-one communication app with instant messaging and real-time conversations.",
     tags: ["React", "Node.js", "MongoDB", "Express.js", "WebSocket", "Tailwind CSS"],
