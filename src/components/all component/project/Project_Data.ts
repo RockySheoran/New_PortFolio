@@ -3,7 +3,7 @@ export const projects = [
     id: 1,
     title: "StudyAI",
     description: "StudyAI revolutionizes learning with intelligent AI tutoring that adapts to your needs. Features include instant PDF summarization, personalized interview preparation, adaptive knowledge testing, and real-time current affairs updates. Built with advanced AI to deliver efficient, personalized education experiences that accelerate your learning journey.",
-    tags: ["Next.js","Gemini","Langchain","BullMQ", "Zustand", "Tailwind CSS","Shadcn Ui","Node.js","Express.js","MongoDB","TypeScript","Redis"],
+    tags: ["Next.js","Gemini","Langchain","LLM","BullMQ", "Zustand", "Tailwind CSS","Shadcn Ui","Node.js","Express.js","MongoDB","TypeScript","Redis"],
     image: "/image/studyai.png",
     github: "https://github.com/RockySheoran/StudyAI",
     live: "https://study-ai-assist.vercel.app/",
