@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export default function AboutSection() {
-  const resume = "/image/Rocky.pdf";
+  const resume = "/Rocky-resume.pdf";
   return (
     <section
       id="about"
@@ -165,7 +165,7 @@ export default function AboutSection() {
                   <div>
                     <h4 className="font-medium">Notable Projects</h4>
                     <p className="text-sm text-muted-foreground">
-                      Balance (Finance App) & Hemolink (Blood Donation Platform)
+                      Balance (Finance App) & StudyAI (AI Tutor)
                     </p>
                   </div>
                 </motion.div>

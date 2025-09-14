@@ -33,7 +33,7 @@ export default function HomePage() {
     },
     { icon: Mail, label: "Email", url: "mailto:rockysheoran72@example.com" },
   ];
-  const resume = "/image/Rocky.pdf";
+  const resume = "/Rocky-resume.pdf";
 
   return (
     <div className="">
