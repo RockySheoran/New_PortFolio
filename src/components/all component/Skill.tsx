@@ -30,11 +30,40 @@ import {
   SiDocker,
   SiWebcomponentsdotorg,
   SiMysql,
+  SiC,
+  SiPypy,
+  SiPython,
 } from "react-icons/si";
 import { FaReact, FaJava } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
 
 const skills = [
+  // language
+  {
+    name: "TypeScript",
+    icon: <SiTypescript className="h-6 w-6 text-[#3178C6]" />,
+    category: "language",
+  },
+  {
+    name: "python",
+    icon: <SiPython className="h-6 w-6 text-[#3178C6]" />,
+    category: "language",
+  },
+  {
+    name: "C",
+    icon: <SiC className="h-6 w-6 text-[#3178C6]" />,
+    category: "language",
+  },
+  {
+    name: "JavaScript",
+    icon: <SiJavascript className="h-6 w-6 text-[#F7DF1E]" />,
+    category: "language",
+  },
+  {
+    name: "Java",
+    icon: <FaJava className="h-6 w-6 text-[#F7DF1E]" />,
+    category: "language",
+  },
   // Frontend
   {
     name: "Next.js",
@@ -60,16 +89,6 @@ const skills = [
     name: "Tailwind",
     icon: <SiTailwindcss className="h-6 w-6 text-[#06B6D4]" />,
     category: "frontend",
-  },
-  {
-    name: "TypeScript",
-    icon: <SiTypescript className="h-6 w-6 text-[#3178C6]" />,
-    category: "language",
-  },
-  {
-    name: "JavaScript",
-    icon: <SiJavascript className="h-6 w-6 text-[#F7DF1E]" />,
-    category: "language",
   },
   {
     name: "shadcn/ui",
@@ -117,11 +136,11 @@ const skills = [
     icon: <Link2 className="h-6 w-6 text-green-500" />,
     category: "ai",
   },
-  {
-    name: "MCP Server",
-    icon: <Server className="h-6 w-6 text-orange-500" />,
-    category: "backend",
-  },
+  // {
+  //   name: "MCP Server",
+  //   icon: <Server className="h-6 w-6 text-orange-500" />,
+  //   category: "backend",
+  // },
   // Databases
   {
     name: "MongoDB",
@@ -142,12 +161,6 @@ const skills = [
     name: "Redis",
     icon: <SiRedis className="h-6 w-6 text-[#DC382D]" />,
     category: "database",
-  },
-  // Languages
-  {
-    name: "Java",
-    icon: <FaJava className="h-6 w-6 text-[#007396]" />,
-    category: "language",
   },
   // Tools
   {
