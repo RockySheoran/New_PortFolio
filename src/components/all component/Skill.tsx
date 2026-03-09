@@ -33,6 +33,8 @@ import {
   SiC,
   SiPypy,
   SiPython,
+  SiAngular,
+  SiSpringboot,
 } from "react-icons/si";
 import { FaReact, FaJava } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
@@ -106,11 +108,11 @@ const skills = [
     category:"backend"
   },{
     name: "Spring Cloud",
-    icon: <SiSpringcloud className="h-6 w-6 text-green-500" />,
+    icon: <Server className="h-6 w-6 text-green-500" />,
     category: "backend"
   },{
-  name :"hibernate",
-  icon:<SiHibernate className="h-6 w-6 text-green-500"/>,
+  name :"Hibernate",
+  icon:<Network className="h-6 w-6 text-green-500"/>,
   category:"backend"
   },
 
