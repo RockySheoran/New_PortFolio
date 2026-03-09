@@ -57,9 +57,9 @@ export default function AboutSection() {
                 className="text-lg leading-relaxed bg-muted/50 p-6 rounded-lg border-l-4 border-primary"
               >
                 <span className="font-semibold text-primary">
-                  Aspiring Full Stack Developer
+                  Aspiring Software Developer
                 </span>{" "}
-                specializing in Next.js and Node.js, with hands-on experience
+                specializing in Angular, React and Node.js, SpringBoot with hands-on experience
                 building real-time applications. Strong problem-solver focused
                 on efficient, scalable solutions and effective team
                 collaboration.
@@ -73,11 +73,11 @@ export default function AboutSection() {
               >
                 <div className="flex items-center gap-3">
                   <Code className="h-5 w-5 text-primary" />
-                  <span>Next.js & React</span>
+                  <span>Angular & React</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Rocket className="h-5 w-5 text-blue-500" />
-                  <span>Node.js Backend</span>
+                  <span>Node.js, SpringBoot Backend</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Lightbulb className="h-5 w-5 text-amber-500" />
@@ -164,7 +164,7 @@ export default function AboutSection() {
                   <div>
                     <h4 className="font-medium">Notable Projects</h4>
                     <p className="text-sm text-muted-foreground">
-                      Balance (Finance App) & StudyAI (AI Tutor)
+                       Life-flow(Blood donation) & StudyAI (AI Tutor)
                     </p>
                   </div>
                 </motion.div>
@@ -180,7 +180,7 @@ export default function AboutSection() {
                   <div>
                     <h4 className="font-medium">Technical Skills</h4>
                     <p className="text-sm text-muted-foreground">
-                      Next.js, React, Node.js, MongoDB, PostgreSQL, Redis
+                      Angular, React, Node.js,SpringBoot, MongoDB, PostgreSQL, Redis, SQL
                     </p>
                   </div>
                 </motion.div>

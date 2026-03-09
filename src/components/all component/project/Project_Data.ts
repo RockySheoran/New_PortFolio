@@ -22,13 +22,14 @@ export const projects = [
   },
   {
     id: 3,
-    title: "HemoLink(Working stop)",
+    title: "Life-Flow(Only Backend)",
     description: "A Decentralized Blood Donation Matching System aims to solve these issues by leveraging technology to connect donors with recipients in real time, ensuring timely availability of blood while preventing fraud and misuse.",
-    tags: ["Next.js", "Redux", "Tailwind CSS","Zustand","Shadcn Ui","microservices","SpringBoot","Docker","PostgreSQL","Redis"],
+    tags: ["microservices","SpringBoot","Docker","PostgreSQL","Redis", "Spring cloud"
+    ],
     image: "/image/hemo.png",
-    github: "https://github.com/RockySheoran/HemoLink",
-    live: "https://hemo-link-iota.vercel.app/",
-    work:"Frontend Developer",
+    github: "https://github.com/RockySheoran/Life-Flow",
+    // live: "https://hemo-link-iota.vercel.app/",
+    work:"Backend Developer",
     featured: true
   },
   {

@@ -45,16 +45,6 @@ const skills = [
     category: "language",
   },
   {
-    name: "python",
-    icon: <SiPython className="h-6 w-6 text-[#3178C6]" />,
-    category: "language",
-  },
-  {
-    name: "C",
-    icon: <SiC className="h-6 w-6 text-[#3178C6]" />,
-    category: "language",
-  },
-  {
     name: "JavaScript",
     icon: <SiJavascript className="h-6 w-6 text-[#F7DF1E]" />,
     category: "language",
@@ -76,6 +66,11 @@ const skills = [
     category: "frontend",
   },
   {
+    name:"Angular",
+    icon:<SiAngular className="h-6 w-6 text-green-500"/>,
+    category:"frontend"
+  },
+  {
     name: "Redux",
     icon: <SiRedux className="h-6 w-6 text-[#764ABC]" />,
     category: "frontend",
@@ -88,15 +83,6 @@ const skills = [
   {
     name: "Tailwind",
     icon: <SiTailwindcss className="h-6 w-6 text-[#06B6D4]" />,
-    category: "frontend",
-  },
-  {
-    name: "shadcn/ui",
-    icon: (
-      <div className="h-6 w-6 bg-[#111111] dark:bg-[#EEEEEE] rounded-sm flex items-center justify-center text-white dark:text-black text-xs font-bold">
-        UI
-      </div>
-    ),
     category: "frontend",
   },
   // Backend
@@ -114,7 +100,20 @@ const skills = [
     name: "REST API",
     icon: <Network className="h-6 w-6 text-blue-400" />,
     category: "backend",
+  },{
+    name:"SpringBoot",
+    icon:<SiSpringboot className="h-6 w-6 text-green-500"/>,
+    category:"backend"
+  },{
+    name: "Spring Cloud",
+    icon: <SiSpringcloud className="h-6 w-6 text-green-500" />,
+    category: "backend"
+  },{
+  name :"hibernate",
+  icon:<SiHibernate className="h-6 w-6 text-green-500"/>,
+  category:"backend"
   },
+
   {
     name: "WebSocket",
     icon: <SiWebcomponentsdotorg className="h-6 w-6 text-indigo-400" />,
@@ -126,16 +125,16 @@ const skills = [
     icon: <Brain className="h-6 w-6 text-purple-500" />,
     category: "ai",
   },
-  {
-    name: "RAG",
-    icon: <FileSearch className="h-6 w-6 text-blue-500" />,
-    category: "ai",
-  },
-  {
-    name: "LangChain",
-    icon: <Link2 className="h-6 w-6 text-green-500" />,
-    category: "ai",
-  },
+  // {
+  //   name: "RAG",
+  //   icon: <FileSearch className="h-6 w-6 text-blue-500" />,
+  //   category: "ai",
+  // },
+  // {
+  //   name: "LangChain",
+  //   icon: <Link2 className="h-6 w-6 text-green-500" />,
+  //   category: "ai",
+  // },
   // {
   //   name: "MCP Server",
   //   icon: <Server className="h-6 w-6 text-orange-500" />,
@@ -173,11 +172,7 @@ const skills = [
     icon: <SiDocker className="h-6 w-6 text-[#2496ED]" />,
     category: "tool",
   },
-  {
-    name: "Prisma",
-    icon: <SiPrisma className="h-6 w-6 text-[#2D3748] dark:text-[#ffffff]" />,
-    category: "tool",
-  },
+  
 ];
 
 const categories = [
