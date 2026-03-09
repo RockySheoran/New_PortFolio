@@ -143,13 +143,12 @@ export default function AboutSection() {
                     <Code className="h-5 w-5 text-blue-500" />
                   </div>
                   <div>
-                    <h4 className="font-medium">Full Stack Developer Intern</h4>
+                    <h4 className="font-medium">Software Developer Intern</h4>
                     <p className="text-sm text-muted-foreground">
-                      Developed financial dashboard with Next.js 14, TypeScript,
-                      Node.js and shadcn/ui
+                      Learning new skills 
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">
-                      Prasunet Company | Mar-Apr 2025
+                      CodeInsight technologies (P) Ltd. | Mar 2026 - present
                     </p>
                   </div>
                 </motion.div>
